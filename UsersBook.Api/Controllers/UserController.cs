@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using UsersBook.Application.Interfaces;
 using UsersBook.Domain.Models;
 
@@ -6,6 +7,7 @@ namespace UsersBook.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowOrigin")]
     public class UserController : ControllerBase
     {
         public readonly IUserAppService _appService;

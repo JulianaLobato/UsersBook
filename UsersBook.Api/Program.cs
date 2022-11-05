@@ -22,6 +22,11 @@ builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builde
 var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new AutoMappingWebApi()); });
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+});
+
 builder.Services.AddScoped<IUserAppService, UserAppService>();
 
 builder.Services.AddScoped<IUserService, UserService>();
@@ -30,8 +35,6 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddEnvironmentVariables();
-
-
 
 var app = builder.Build();
 
@@ -45,6 +48,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors(options => options.AllowAnyOrigin());
 
 app.MapControllers();
 
