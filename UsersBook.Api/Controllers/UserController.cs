@@ -19,6 +19,7 @@ namespace UsersBook.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var response = await _appService.Get();
+
             return Ok(response);
         }
 
@@ -27,6 +28,10 @@ namespace UsersBook.Api.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var response = await _appService.Get(id);
+
+            if (response is null)
+                return NotFound();
+
             return Ok(response);
         }
 

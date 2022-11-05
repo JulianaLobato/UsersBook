@@ -16,7 +16,7 @@ namespace UsersBook.Domain.Entities
             get => _name;
             set
             {
-                if (string.IsNullOrWhiteSpace(_name))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("The property Name can not be empity.");
 
                 _name = value;
@@ -34,8 +34,10 @@ namespace UsersBook.Domain.Entities
             get => _email;
             set
             {
-                if (string.IsNullOrWhiteSpace(_email))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("The property Email can not be empity.");
+
+                _email = value;
             }
         }
 
@@ -44,11 +46,11 @@ namespace UsersBook.Domain.Entities
             get => _birthDate;
             set
             {
-                if (_birthDate.Date == DateTime.MinValue)
+                if (value.Date == DateTime.MinValue)
                     throw new ArgumentException("Invalid Birth Date");
 
-                if (_birthDate.Date >= DateTime.Today)
-                    throw new ArgumentException("The property Birth Date can not be a date bigger the today");
+                if (value.Date >= DateTime.Today)
+                    throw new ArgumentException("The property Birth Date can not be set as today or bigger");
 
                 _birthDate = value;
             }

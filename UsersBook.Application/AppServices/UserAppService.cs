@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UsersBook.Application.Interfaces;
+using UsersBook.Domain.Entities;
 using UsersBook.Domain.Interfaces.Services;
 using UsersBook.Domain.Models;
 
@@ -38,13 +39,13 @@ namespace UsersBook.Application.AppServices
         {
             return await Task.Run(() =>
             {
-                return _service.Create(user);
+                return _service.Create(_mapper.Map<User>(user));
             });
         }
 
         public async Task Update(int id, UserModel user)
         {
-            await Task.Run(() => _service.Update(id, user));
+            await Task.Run(() => _service.Update(id, _mapper.Map<User>(user)));
         }
 
         public async Task Delete(int id)

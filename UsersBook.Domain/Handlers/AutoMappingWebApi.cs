@@ -8,7 +8,7 @@ namespace UsersBook.Domain.Handlers
     {
         public AutoMappingWebApi()
         {
-            CreateMap<User, UserModel>();
+            CreateMap<User, UserModel>().ReverseMap();
         }
     }
 }
