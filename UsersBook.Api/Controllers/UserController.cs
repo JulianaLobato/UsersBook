@@ -40,7 +40,7 @@ namespace UsersBook.Api.Controllers
         public async Task<IActionResult> Post([FromBody] UserModel user)
         {
             var response = await _appService.Create(user);
-            return Ok(response);
+            return new ObjectResult(response) { StatusCode = StatusCodes.Status201Created };
         }
 
         [HttpPut("{id}")]
